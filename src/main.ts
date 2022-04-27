@@ -11,6 +11,7 @@ async function bootstrap() {
 
   await app.listen(port);
 
-  logger.debug(`Server is running on port: ${port}`);
+  logger.debug(`🚀 Server is running on port: ${port}`);
 }
+
 bootstrap();
