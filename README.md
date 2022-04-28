@@ -44,4 +44,6 @@ To access the file path on AWS, we only need to get the location from the respon
 
 - [File upload in NestJS](https://docs.nestjs.com/techniques/file-upload)
 
-* [ACL in AWS S3 buckets](https://docs.aws.amazon.com/AmazonS3/latest/userguide/acl-overview.html#permissions)
+- [ACL in AWS S3 buckets](https://docs.aws.amazon.com/AmazonS3/latest/userguide/acl-overview.html#permissions)
+
+- [Tutorial](https://wanago.io/2020/08/03/api-nestjs-uploading-public-files-to-amazon-s3/)
