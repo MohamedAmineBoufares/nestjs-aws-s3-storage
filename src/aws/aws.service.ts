@@ -13,28 +13,35 @@ export class AwsService {
   });
 
   async uploadPublicFile(dataBuffer: Buffer, filename: string) {
-    const uploadResult = await this.s3
-      .upload({
-        Bucket: this.bucketName,
-        Body: dataBuffer,
-        Key: `${filename}`,
-        ACL: 'public-read',
-        ContentDisposition: 'inline',
-      })
-      .promise();
+    try {
+      const uploadResult = await this.s3
+        .upload({
+          Bucket: this.bucketName,
+          Body: dataBuffer,
+          Key: `${filename}`,
+          ACL: 'public-read',
+          ContentDisposition: 'inline',
+        })
+        .promise();
 
-    return uploadResult;
+      return uploadResult;
+    } catch (error) {
+      console.log(error);
+    }
   }
 
-  // async deletePublicFile(fileId: number) {
-  //   const file = await this.publicFilesRepository.findOne({ id: fileId });
-  //   const s3 = new S3();
-  //   await s3
-  //     .deleteObject({
-  //       Bucket: this.configService.get('AWS_PUBLIC_BUCKET_NAME'),
-  //       Key: file.key,
-  //     })
-  //     .promise();
-  //   await this.publicFilesRepository.delete(fileId);
-  // }
+  async deletePublicFile(fileKey: string) {
+    try {
+      const deletedFile = await this.s3
+        .deleteObject({
+          Bucket: this.bucketName,
+          Key: fileKey,
+        })
+        .promise();
+
+      return deletedFile;
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }

@@ -1,5 +1,7 @@
 import {
   Controller,
+  Delete,
+  Param,
   Post,
   UploadedFile,
   UseInterceptors,
@@ -14,7 +16,12 @@ export class AwsController {
 
   @Post()
   @UseInterceptors(FileInterceptor('file'))
-  create(@UploadedFile() file: Express.Multer.File) {
+  async uploadFile(@UploadedFile() file: Express.Multer.File) {
     return this.awsService.uploadPublicFile(file.buffer, file.originalname);
+  }
+
+  @Delete('/:key')
+  async deleteFile(@Param('key') fileKey: string) {
+    return this.awsService.deletePublicFile(fileKey);
   }
 }
